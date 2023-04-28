@@ -1,0 +1,9 @@
+{
+  "name": "op_event-topic-source",
+  "config": {
+    "connector.class": "org.apache.kafka.connect.file.FileStreamSourceConnector",
+    "tasks.max": "1",
+    "file": "/files/op_events.json",
+    "topic": "op_events"
+  }
+}
