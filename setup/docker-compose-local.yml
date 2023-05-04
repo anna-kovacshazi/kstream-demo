@@ -102,6 +102,14 @@ services:
       - KAFKA_CLUSTERS_0_KAFKACONNECT_0_NAME=connect
   #      - KAFKA_CLUSTERS_0_SCHEMAREGISTRY=http://schemaregistry:8081
 
+  mongodb_container:
+    container_name: mongo
+    image: candis/mongo-replica-set
+    ports:
+      - "27017:27017"
+      - "27018:27018"
+      - "27019:27019"
+
   start-dependencies:
     image: dadarek/wait-for-dependencies
     depends_on:
@@ -110,5 +118,6 @@ services:
       - connect
       #      - schemaregistry
       - kafka-ui
+      - mongodb_container
     #    command: zookeeper:2181 kafka1:9092 schemaregistry:8081 kafka-ui:8080
-    command: zookeeper:2181 kafka1:9092 connect:8083 kafka-ui:8080
+    command: zookeeper:2181 kafka1:9092 connect:8083 kafka-ui:8080 mongodb_container:27017
